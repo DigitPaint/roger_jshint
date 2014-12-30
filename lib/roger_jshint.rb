@@ -1,0 +1,3 @@
+module RogerJsHint; end
+
+require File.dirname(__FILE__) + '/roger_jshint/lint'
