@@ -20,9 +20,8 @@ module RogerJsHint
     end
 
     def detect_jshint
-      `#{JSHINT} -v`
-      rescue Errno::ENOENT
-        raise 'Could not find jshint. Install jshint using npm.'
+      detect = system(format('%s -v', Shellwords.escape(JSHINT)))
+      fail 'Could not find jshint. Install jshint using npm.' unless detect
     end
 
     def report(test, file_path, lints)
@@ -31,9 +30,7 @@ module RogerJsHint
         test.log(self, "No erors in #{file_path}")
       else
         lints.each do |lint|
-          test.log(self,
-                   "#{lint[0]}:#{lint[1]} " \
-                   "#{lint[2]}: #{lint[3]}")
+          test.log(self, "#{lint[0]}:#{lint[1]} #{lint[2]}: #{lint[3]}")
         end
         success = false
       end
@@ -50,13 +47,10 @@ module RogerJsHint
       test.log(self, 'JS-linting files')
 
       test.get_files(options[:match], options[:skip]).each do |file_path|
-        output = `#{JSHINT_COMMAND} #{file_path}`
-        if output.start_with? 'ERROR'
-          fail "Could not load file #{file_path}"
-        else
-          lint = JSON.parse output
-          report(test, file_path, lint)
-        end
+        execute = JSHINT_COMMAND + ' ' + Shellwords.escape(file_path)
+        output = `#{execute}`
+        lint = JSON.parse output
+        report(test, file_path, lint)
       end
     end
   end
