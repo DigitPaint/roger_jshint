@@ -1,0 +1,6 @@
+LineLength:
+  Max: 100
+
+Style/HashSyntax:
+  Enabled:
+    False
