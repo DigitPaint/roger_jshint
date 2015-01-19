@@ -3,5 +3,5 @@ rvm:
   - 1.9.5
   - 2.1.5
   - 2.2.0
-before_install:
+before_script:
   - sudo npm install jshint
