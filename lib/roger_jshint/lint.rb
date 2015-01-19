@@ -1,3 +1,4 @@
+require 'shellwords'
 require 'json'
 require 'roger/test'
 
