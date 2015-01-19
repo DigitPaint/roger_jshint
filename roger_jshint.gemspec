@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
   s.require_paths = ['lib']
 
-  s.add_dependency 'roger', '~> 0.12', '>= 0.12.5'
+  s.add_dependency 'roger', '~> 0.13', '>= 0.13.0'
 end
