@@ -22,7 +22,7 @@ module RogerJsHint
     end
 
     def detect_jshint
-      detect = system(format('%s -v', Shellwords.escape(@options[:jshint])))
+      detect = system(format('%s -v 2>/dev/null', Shellwords.escape(@options[:jshint])))
       fail 'Could not find jshint. Install jshint using npm.' unless detect
     end
 
