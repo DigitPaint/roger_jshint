@@ -1,5 +1,6 @@
 roger_jshint
 ============
+[![Build Status](https://travis-ci.org/hkrutzer/roger_jshint.svg?branch=master)](https://travis-ci.org/hkrutzer/roger_jshint)
 
 Lint JavaScript files from within Roger. This plugin uses [jshint](https://github.com/jshint/jshint). If present, .jshintrc in your project will be used. If not, jshint will walk the directory tree upwards until a .jshintrc file is found. As a last resort, [jshint's default configuration](https://raw.githubusercontent.com/jshint/jshint/master/examples/.jshintrc) is used.
 
