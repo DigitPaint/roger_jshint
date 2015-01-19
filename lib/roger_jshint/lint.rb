@@ -4,23 +4,24 @@ require 'roger/test'
 module RogerJsHint
   # JS linter plugin for Roger
   class Lint
-    JSHINT = 'jshint'
-    JSHINT_COMMAND = "#{JSHINT} --reporter=" +
-                     File.expand_path('jsonreporter.js', File.dirname(__FILE__)) + ' '
-
     # @param [Hash] options The options
     # @option options [Array] :match Files to match
     # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
+    # @option options [Array] :jshint Jshint command
     def initialize(options = {})
       @options = {
         :match => ['html/**/*.js'],
-        :skip => []
+        :skip => [],
+        :jshint => 'jshint'
       }
       @options.update(options) if options
+
+      @jshint_command = "#{@options[:jshint]} --reporter=" +
+                        File.expand_path('jsonreporter.js', File.dirname(__FILE__)) + ' '
     end
 
     def detect_jshint
-      detect = system(format('%s -v', Shellwords.escape(JSHINT)))
+      detect = system(format('%s -v', Shellwords.escape(@options[:jshint])))
       fail 'Could not find jshint. Install jshint using npm.' unless detect
     end
 
@@ -47,7 +48,7 @@ module RogerJsHint
       test.log(self, 'JS-linting files')
 
       test.get_files(options[:match], options[:skip]).each do |file_path|
-        execute = JSHINT_COMMAND + ' ' + Shellwords.escape(file_path)
+        execute = @jshint_command + ' ' + Shellwords.escape(file_path)
         output = `#{execute}`
         lint = JSON.parse output
         report(test, file_path, lint)
