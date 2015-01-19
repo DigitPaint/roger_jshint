@@ -10,7 +10,7 @@ module RogerJsHint
 
     # @param [Hash] options The options
     # @option options [Array] :match Files to match
-    # @option options [Array[Regexp]] :skip An array of file regular expressions to specifiy which files to skip.
+    # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def initialize(options = {})
       @options = {
         :match => ['html/**/*.js'],
@@ -39,7 +39,7 @@ module RogerJsHint
 
     # @param [Hash] options The options
     # @option options [Array] :match Files to match
-    # @option options [Array[Regexp]] :skip An array of file regular expressions to specifiy which files to skip.
+    # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def call(test, options)
       options = {}.update(@options).update(options)
 
