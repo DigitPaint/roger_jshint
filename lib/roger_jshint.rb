@@ -1,3 +1,5 @@
-module RogerJsHint; end
+# JS hint plugin
+module RogerJsHint
+end
 
 require File.dirname(__FILE__) + '/roger_jshint/lint'
