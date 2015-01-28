@@ -5,4 +5,4 @@ rvm:
   - 2.2.0
 before_script:
   - npm install jshint
-  - cp ./test/jshintrc .jshintrc
+  - cp ./test/data/jshintrc .jshintrc
