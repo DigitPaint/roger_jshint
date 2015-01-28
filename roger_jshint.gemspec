@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.authors = ['Hans Krutzer', 'Flurin Egger']
   s.email = ['info@digitpaint.nl', 'hans@digitpaint.nl', 'flurin@digitpaint.nl']
   s.name = 'roger_jshint'
-  s.version = '0.0.2'
+  s.version = '0.1.0'
   s.homepage = 'https://github.com/digitpaint/roger_jshint'
 
   s.summary = 'Lint JavaScript files within Roger'
