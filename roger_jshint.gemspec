@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.authors = ['Hans Krutzer']
-  s.email = ['info@digitpaint.nl', 'hans@digitpaint.nl']
+  s.authors = ['Hans Krutzer', 'Flurin Egger']
+  s.email = ['info@digitpaint.nl', 'hans@digitpaint.nl', 'flurin@digitpaint.nl']
   s.name = 'roger_jshint'
   s.version = '0.0.2'
   s.homepage = 'https://github.com/hkrutzer/roger_scsslinter'
