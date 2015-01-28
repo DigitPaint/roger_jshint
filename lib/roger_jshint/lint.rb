@@ -42,8 +42,10 @@ module RogerJsHint
     # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def call(test, options)
       options = {}.update(@options).update(options)
-      command = [@options[:jshint]]
-      command << "--reporter=" + File.expand_path('jsonreporter.js', File.dirname(__FILE__))
+      command = [
+        @options[:jshint],
+        "--reporter=" + File.expand_path('jsonreporter.js', File.dirname(__FILE__))
+      ]
 
       detect_jshint
       test.log(self, 'JS-linting files')

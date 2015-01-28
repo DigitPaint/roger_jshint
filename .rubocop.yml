@@ -12,3 +12,7 @@ Style/HashSyntax:
 Style/StringLiterals:
   Enabled:
     False
+
+Metrics/MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 25
