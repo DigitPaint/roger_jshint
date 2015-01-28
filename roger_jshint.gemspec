@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.email = ['info@digitpaint.nl', 'hans@digitpaint.nl', 'flurin@digitpaint.nl']
   s.name = 'roger_jshint'
   s.version = '0.0.2'
-  s.homepage = 'https://github.com/hkrutzer/roger_scsslinter'
+  s.homepage = 'https://github.com/digitpaint/roger_jshint'
 
   s.summary = 'Lint JavaScript files within Roger'
   s.description = <<-EOF
