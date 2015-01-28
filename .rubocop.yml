@@ -1,6 +1,14 @@
 LineLength:
   Max: 100
 
+Metrics/AbcSize:
+  Enabled:
+    False
+
 Style/HashSyntax:
+  Enabled:
+    False
+
+Style/StringLiterals:
   Enabled:
     False
