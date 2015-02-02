@@ -1,4 +1,4 @@
-Rober JSHint
+Roger JSHint
 ============
 
 [![Build Status](https://travis-ci.org/DigitPaint/roger_jshint.svg)](https://travis-ci.org/DigitPaint/roger_jshint)
