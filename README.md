@@ -1,6 +1,5 @@
 Roger JSHint
 ============
-[![Build Status](https://travis-ci.org/hkrutzer/roger_jshint.svg?branch=master)](https://travis-ci.org/hkrutzer/roger_jshint)
 
 [![Build Status](https://travis-ci.org/DigitPaint/roger_jshint.svg)](https://travis-ci.org/DigitPaint/roger_jshint)
 
