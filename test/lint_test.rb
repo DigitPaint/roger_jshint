@@ -20,6 +20,12 @@ end
 
 # Linting plugin unit test
 class LintTest < Test::Unit::TestCase
+  def setup
+    @file_name = ".jshintrc"
+    assert !File.exist?(@file_name), ".jshintrc file already exists."
+    FileUtils.cp("./test/data/jshintrc", "./.jshintrc")
+  end
+
   def test_lint
     faketester = TesterStub.new
 
@@ -34,5 +40,9 @@ class LintTest < Test::Unit::TestCase
                   "test/data/test.js:1 1: 'x' is not defined.",
                   "test/data/test.js:2 1: 'alert' is not defined.",
                   "test/data/test.js:2 7: 'x' is not defined."])
+  end
+
+  def teardown
+    File.unlink @file_name
   end
 end
