@@ -16,13 +16,11 @@ module RogerJsHint
         :jshint => 'jshint'
       }
       @options.update(options) if options
-
-      @jshint_command = "#{@options[:jshint]} --reporter=" +
-                        File.expand_path('jsonreporter.js', File.dirname(__FILE__)) + ' '
     end
 
     def detect_jshint
-      detect = system(format('%s -v 2>/dev/null', Shellwords.escape(@options[:jshint])))
+      command = [@options[:jshint], "-v", "2>/dev/null"]
+      detect = system(Shellwords.join(command))
       fail 'Could not find jshint. Install jshint using npm.' unless detect
     end
 
@@ -44,13 +42,16 @@ module RogerJsHint
     # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def call(test, options)
       options = {}.update(@options).update(options)
+      command = [
+        @options[:jshint],
+        "--reporter=" + File.expand_path('jsonreporter.js', File.dirname(__FILE__))
+      ]
 
       detect_jshint
       test.log(self, 'JS-linting files')
 
       test.get_files(options[:match], options[:skip]).each do |file_path|
-        execute = @jshint_command + ' ' + Shellwords.escape(file_path)
-        output = `#{execute}`
+        output = `#{Shellwords.join(command + [Shellwords.escape(file_path)])}`
         lint = JSON.parse output
         report(test, file_path, lint)
       end

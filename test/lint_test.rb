@@ -14,7 +14,7 @@ class TesterStub
   end
 
   def get_files(_, _)
-    ['test/test.js']
+    ['test/data/test.js']
   end
 end
 
@@ -30,9 +30,9 @@ class LintTest < Test::Unit::TestCase
     messages.shift
 
     assert_equal(messages,
-                 ["test/test.js:0 0: Bad option: 'subsub'.",
-                  "test/test.js:1 1: 'x' is not defined.",
-                  "test/test.js:2 1: 'alert' is not defined.",
-                  "test/test.js:2 7: 'x' is not defined."])
+                 ["test/data/test.js:0 0: Bad option: 'subsub'.",
+                  "test/data/test.js:1 1: 'x' is not defined.",
+                  "test/data/test.js:2 1: 'alert' is not defined.",
+                  "test/data/test.js:2 7: 'x' is not defined."])
   end
 end

@@ -1,6 +1,18 @@
 LineLength:
   Max: 100
 
+Metrics/AbcSize:
+  Enabled:
+    False
+
 Style/HashSyntax:
   Enabled:
     False
+
+Style/StringLiterals:
+  Enabled:
+    False
+
+Metrics/MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 25
