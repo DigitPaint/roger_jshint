@@ -30,10 +30,12 @@ class LintTest < Test::Unit::TestCase
     faketester = TesterStub.new
 
     linter = RogerJsHint::Lint.new
-    linter.call(faketester, {})
+    success = linter.call(faketester, {})
 
     messages = faketester.messages
     messages.shift
+
+    assert_equal(false, success)
 
     assert_equal(messages,
                  ["test/data/test.js:0 0: Bad option: 'subsub'.",
