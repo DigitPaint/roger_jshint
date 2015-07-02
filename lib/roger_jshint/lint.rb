@@ -50,11 +50,12 @@ module RogerJsHint
       detect_jshint
       test.log(self, 'JS-linting files')
 
-      test.get_files(options[:match], options[:skip]).each do |file_path|
+      failures = test.get_files(options[:match], options[:skip]).select do |file_path|
         output = `#{Shellwords.join(command + [Shellwords.escape(file_path)])}`
         lint = JSON.parse output
-        report(test, file_path, lint)
+        !report(test, file_path, lint)
       end
+      failures.empty?
     end
   end
 end
