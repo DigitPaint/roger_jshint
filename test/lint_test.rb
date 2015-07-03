@@ -1,5 +1,5 @@
-require_relative '../lib/roger_jshint/lint.rb'
-require 'test/unit'
+require_relative "../lib/roger_jshint/lint.rb"
+require "test/unit"
 
 # Fake tester to pass into the linter plugin
 class TesterStub
@@ -14,7 +14,7 @@ class TesterStub
   end
 
   def get_files(_, _)
-    ['test/data/test.js']
+    ["test/data/test.js"]
   end
 end
 

@@ -1,6 +1,6 @@
-require 'shellwords'
-require 'json'
-require 'roger/test'
+require "shellwords"
+require "json"
+require "roger/test"
 
 module RogerJsHint
   # JS linter plugin for Roger
@@ -11,20 +11,25 @@ module RogerJsHint
     # @option options [Array] :jshint Jshint command
     def initialize(options = {})
       @options = {
-        :match => ['html/**/*.js'],
-        :skip => [],
-        :jshint => 'jshint'
+        match: ["html/**/*.js"],
+        skip: [],
+        jshint: "jshint"
       }
+      detect_jshint
+
       @options.update(options) if options
     end
 
-    def detect_jshint
-      command = [@options[:jshint], "-v", "2>/dev/null"]
-      detect = system(Shellwords.join(command))
-      fail 'Could not find jshint. Install jshint using npm.' unless detect
-    end
+    def report(test, file_path)
+      command = [
+        @options[:jshint],
+        reporter
+      ]
 
-    def report(test, file_path, lints)
+      # The actual linting
+      output = `#{Shellwords.join(command + [Shellwords.escape(file_path)])}`
+      lints = JSON.parse output
+
       success = true
       if lints.empty?
         test.log(self, "No erors in #{file_path}")
@@ -42,20 +47,25 @@ module RogerJsHint
     # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def call(test, options)
       options = {}.update(@options).update(options)
-      command = [
-        @options[:jshint],
-        "--reporter=" + File.expand_path('jsonreporter.js', File.dirname(__FILE__))
-      ]
 
-      detect_jshint
-      test.log(self, 'JS-linting files')
+      test.log(self, "JS-linting files")
 
       failures = test.get_files(options[:match], options[:skip]).select do |file_path|
-        output = `#{Shellwords.join(command + [Shellwords.escape(file_path)])}`
-        lint = JSON.parse output
-        !report(test, file_path, lint)
+        !report(test, file_path)
       end
       failures.empty?
+    end
+
+    private
+
+    def detect_jshint
+      command = [@options[:jshint], "-v", "2>/dev/null"]
+      detect = system(Shellwords.join(command))
+      fail "Could not find jshint. Install jshint using npm." unless detect
+    end
+
+    def reporter
+      "--reporter=" + File.expand_path("jsonreporter.js", File.dirname(__FILE__))
     end
   end
 end
