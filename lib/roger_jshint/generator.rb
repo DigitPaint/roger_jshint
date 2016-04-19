@@ -8,9 +8,9 @@ module RogerJsHint
   # Lint configuration retriever
   class Generator < Roger::Generators::Base
     include Thor::Actions
-    CONFIG_PATH = ".jshintrc"
+    CONFIG_PATH = ".jshintrc".freeze
     DEFAULT_CONFIG_URL = "https://raw.githubusercontent.com/"\
-                         "DigitPaint/javascript/master/linters/jshintrc"
+                         "DigitPaint/javascript/master/linters/jshintrc".freeze
 
     desc "JsHint generator creates an .jshintrc config file"
     class_option(
@@ -30,11 +30,7 @@ module RogerJsHint
 
     # Write config file
     def write_config_file
-      if options[:config]
-        config = open(options[:config]).read
-      else
-        config = open(DEFAULT_CONFIG_URL).read
-      end
+      config = options[:config] ? open(options[:config]).read : open(DEFAULT_CONFIG_URL).read
 
       # Create file check if we don't have a conflict or something
       create_file "#{@project.path}/#{CONFIG_PATH}", config, force: options[:force]

@@ -37,11 +37,10 @@ class LintTest < Test::Unit::TestCase
 
     assert_equal(false, success)
 
-    assert_equal(messages,
-                 ["test/data/test.js:0 0: Bad option: 'subsub'.",
-                  "test/data/test.js:1 1: 'x' is not defined.",
-                  "test/data/test.js:2 1: 'alert' is not defined.",
-                  "test/data/test.js:2 7: 'x' is not defined."])
+    assert_includes(messages, "test/data/test.js:0 0: Bad option: 'subsub'.")
+    assert_includes(messages, "test/data/test.js:1 1: 'x' is not defined.")
+    assert_includes(messages, "test/data/test.js:2 1: 'alert' is not defined.")
+    assert_includes(messages, "test/data/test.js:2 7: 'x' is not defined.")
   end
 
   def teardown

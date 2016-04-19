@@ -15,7 +15,6 @@ module RogerJsHint
         skip: [],
         jshint: "jshint"
       }
-      detect_jshint
 
       @options.update(options) if options
     end
@@ -46,6 +45,8 @@ module RogerJsHint
     # @option options [Array] :match Files to match
     # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def call(test, options)
+      detect_jshint
+
       options = {}.update(@options).update(options)
 
       test.log(self, "JS-linting files")
@@ -61,7 +62,7 @@ module RogerJsHint
     def detect_jshint
       command = [@options[:jshint], "-v", "2>/dev/null"]
       detect = system(Shellwords.join(command))
-      fail "Could not find jshint. Install jshint using npm." unless detect
+      raise "Could not find jshint. Install jshint using npm." unless detect
     end
 
     def reporter
