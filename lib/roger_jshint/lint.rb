@@ -15,7 +15,6 @@ module RogerJsHint
         skip: [],
         jshint: "jshint"
       }
-      detect_jshint
 
       @options.update(options) if options
     end
@@ -46,6 +45,8 @@ module RogerJsHint
     # @option options [Array] :match Files to match
     # @option options [Array[Regexp]] :skip Array of regular expressions to skip files
     def call(test, options)
+      detect_jshint
+
       options = {}.update(@options).update(options)
 
       test.log(self, "JS-linting files")
