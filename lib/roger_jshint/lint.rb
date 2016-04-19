@@ -61,7 +61,7 @@ module RogerJsHint
     def detect_jshint
       command = [@options[:jshint], "-v", "2>/dev/null"]
       detect = system(Shellwords.join(command))
-      fail "Could not find jshint. Install jshint using npm." unless detect
+      raise "Could not find jshint. Install jshint using npm." unless detect
     end
 
     def reporter
